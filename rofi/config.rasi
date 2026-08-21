@@ -1,0 +1,63 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    display-drun: " Ứng dụng";
+    display-run: " Chạy lệnh";
+    display-window: " Cửa sổ";
+    drun-display-format: "{name}";
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+* {
+    bg:      #1e1e2ee6;
+    bg-alt:  #313244cc;
+    fg:      #cdd6f4;
+    accent:  #89b4fa;
+    accent2: #cba6f7;
+}
+
+window {
+    background-color: @bg;
+    border-radius: 18px;
+    border: 2px;
+    border-color: @accent;
+    width: 560px;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    padding: 16px;
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    background-color: @bg-alt;
+    border-radius: 12px;
+    padding: 10px 14px;
+    children: [ prompt, entry ];
+}
+
+prompt { text-color: @accent; }
+entry   { text-color: @fg; placeholder: "Tìm ứng dụng..."; placeholder-color: #6c7086; }
+
+listview {
+    lines: 8;
+    spacing: 4px;
+    margin: 12px 0 0 0;
+    fixed-height: false;
+}
+
+element {
+    padding: 8px 10px;
+    border-radius: 10px;
+}
+
+element selected {
+    background-color: @accent;
+    text-color: #1e1e2e;
+}
+
+element-icon { size: 22px; }
+element-text { vertical-align: 0.5; }

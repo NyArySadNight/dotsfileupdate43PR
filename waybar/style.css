@@ -1,0 +1,62 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+    font-size: 13px;
+    min-height: 0;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+window#waybar {
+    background: rgba(30, 30, 46, 0.55);
+    border-radius: 16px;
+    border: 1px solid rgba(137, 180, 250, 0.25);
+    color: #cdd6f4;
+}
+
+#workspaces {
+    background: transparent;
+    margin: 4px 6px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    border-radius: 10px;
+    color: #a6adc8;
+    background: transparent;
+}
+
+#workspaces button.active {
+    background: linear-gradient(45deg, #89b4fa, #cba6f7);
+    color: #1e1e2e;
+    padding: 0 14px;
+}
+
+#workspaces button:hover {
+    background: rgba(137, 180, 250, 0.25);
+}
+
+#clock,
+#cpu, #memory, #temperature,
+#network, #pulseaudio, #battery,
+#tray, #custom-power, #window {
+    padding: 4px 12px;
+    margin: 4px 2px;
+    border-radius: 10px;
+    background: rgba(49, 50, 68, 0.6);
+}
+
+#clock { font-weight: 600; }
+
+#custom-power {
+    color: #f38ba8;
+    margin-right: 8px;
+}
+#custom-power:hover {
+    background: rgba(243, 139, 168, 0.25);
+}
+
+#battery.warning { color: #f9e2af; }
+#battery.critical { color: #f38ba8; }
+
+#cpu:hover, #memory:hover, #network:hover, #pulseaudio:hover {
+    background: rgba(137, 180, 250, 0.2);
+}
