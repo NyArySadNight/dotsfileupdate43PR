@@ -1,38 +1,38 @@
-# StealNateOS Rice — nâng cấp từ 43PR/dotfiles
+# StealNateOS Rice — an upgrade of 43PR/dotfiles
 
-Bộ dotfiles này giữ **100% keybind và luồng thao tác gốc** của
-[43PR/dotfiles](https://github.com/43PR/dotfiles), đồng thời bổ sung một tầng
-đáng kể về hiệu ứng, module và khả năng cấu hình.
+This dotfiles setup keeps **100% of the original keybinds and workflow** from
+[43PR/dotfiles](https://github.com/43PR/dotfiles), while adding a substantial
+layer of effects, modules, and configurability on top.
 
-## Những gì được giữ nguyên
-- Toàn bộ keybind gốc: `$mod+T/D/E/B/F/Q`, toggle waybar, floating trick,
+## What's kept unchanged
+- All original keybinds: `$mod+T/D/E/B/F/Q`, waybar toggle, floating trick,
   wallpaper cycle, screenshot, clipboard (`$mod+V`).
-- Triết lý "rice đơn giản, dễ đọc" — không đưa vào thứ không cần thiết.
+- The "simple, readable rice" philosophy — no unnecessary bloat.
 
-## Những gì được nâng cấp
+## What's upgraded
 
-| Hạng mục | Bản gốc (43PR) | Bản StealNateOS |
+| Category | Original (43PR) | StealNateOS version |
 |---|---|---|
-| Lock screen | `swaylock` cơ bản | `hyprlock` kính mờ, đồng hồ động, avatar |
-| Idle/power | không có | `hypridle`: khóa 5', DPMS 5'30", suspend 15' |
-| Animation | mặc định Hyprland | 6 bezier riêng, animation theo lớp (windows/layers/workspaces/border) |
-| Blur | không cấu hình | blur đa lớp (4 passes) + vibrancy, layer rule riêng cho waybar/rofi/wlogout |
-| Waybar | thư mục trống | config đầy đủ: CPU/RAM/nhiệt độ/mạng/pin/tray + custom power, style Catppuccin |
-| Rofi | thư mục trống | theme bo góc, blur, tiếng Việt |
-| Window rules | không có | rule riêng cho gaming (immediate/noanim để giữ FPS), PiP, dev apps |
-| OSD âm lượng/độ sáng | không có | `swayosd` mượt, không giật |
-| Screenshot | lưu file | thêm bind copy trực tiếp vào clipboard |
-| Wallpaper | script không rõ | `hyprpaper` + script cycle hoàn chỉnh, có state |
+| Lock screen | basic `swaylock` | `hyprlock` with blur, live clock, avatar |
+| Idle/power | none | `hypridle`: lock at 5', DPMS off at 5'30", suspend at 15' |
+| Animation | Hyprland defaults | 6 custom beziers, per-layer animations (windows/layers/workspaces/border) |
+| Blur | not configured | multi-pass blur (4 passes) + vibrancy, dedicated layer rules for waybar/rofi/wlogout |
+| Waybar | empty folder | full config: CPU/RAM/temp/network/battery/tray + custom power button, Catppuccin style |
+| Rofi | empty folder | rounded theme, blurred background |
+| Window rules | none | dedicated gaming rules (immediate/noanim to preserve FPS), PiP, dev apps |
+| Volume/brightness OSD | none | smooth `swayosd`, no stutter |
+| Screenshot | saved to file | added a bind to copy directly to clipboard |
+| Wallpaper | unclear script | `hyprpaper` + a complete cycle script with state tracking |
 
-## Cấu trúc
+## Structure
 ```
 dotfiles/
 ├── hypr/
-│   ├── hyprland.conf      # entrypoint chính
-│   ├── env.conf           # biến môi trường + autostart
-│   ├── keybinds.conf      # toàn bộ keybind (gốc + mới)
+│   ├── hyprland.conf      # main entrypoint
+│   ├── env.conf           # environment variables + autostart
+│   ├── keybinds.conf      # all keybinds (original + new)
 │   ├── windowrules.conf   # window rules & layer rules
-│   ├── monitors.conf      # cấu hình màn hình (chỉnh theo máy bạn)
+│   ├── monitors.conf      # monitor setup (adjust to your machine)
 │   ├── hypridle.conf
 │   ├── hyprlock.conf
 │   ├── hyprpaper.conf
@@ -49,29 +49,29 @@ dotfiles/
     └── kitty.conf
 ```
 
-## Cài đặt
+## Installation
 ```bash
-# gói cần thiết (ví dụ trên Arch/CachyOS)
+# required packages (example for Arch/CachyOS)
 sudo pacman -S hyprland hypridle hyprlock hyprpaper waybar rofi-wayland \
     wlogout kitty swayosd cliphist grim slurp wl-clipboard \
     ttf-jetbrains-mono-nerd papirus-icon-theme
 
-# copy dotfiles vào ~/.config
+# copy dotfiles into ~/.config
 cp -r dotfiles/hypr    ~/.config/
 cp -r dotfiles/waybar  ~/.config/
 cp -r dotfiles/rofi    ~/.config/
 cp -r dotfiles/wlogout ~/.config/
 mkdir -p ~/.config/kitty && cp dotfiles/kitty/kitty.conf ~/.config/kitty/
 
-# thêm wallpaper của bạn vào
+# add your own wallpapers
 mkdir -p ~/.config/hypr/wallpapers
 ```
 
-Sau đó chỉnh `hypr/monitors.conf` theo màn hình thật, và đổi `$browser` trong
-`env.conf` nếu bạn không dùng zen-browser.
+Then adjust `hypr/monitors.conf` to your actual display, and change
+`$browser` in `env.conf` if you don't use zen-browser.
 
-## Bước tiếp theo (nếu muốn "đột phá" thêm)
-- Thêm `matugen` để wallpaper tự sinh bảng màu → đồng bộ waybar/rofi/kitty theo ảnh nền.
-- Thêm `quickshell` thay waybar nếu muốn widget phức tạp hơn (weather, to-do).
-- Ghép các theme này vào skel dotfiles trong `archiso/airootfs/etc/skel` của
-  StealNateOS để user mới có sẵn rice này ngay lần đăng nhập đầu.
+## Next steps (for going even further)
+- Add `matugen` so wallpapers auto-generate a color palette → sync waybar/rofi/kitty to the background image.
+- Add `quickshell` in place of waybar for more complex widgets (weather, to-do lists).
+- Fold these themes into `archiso/airootfs/etc/skel` in StealNateOS so new
+  users get this rice out of the box on first login.
